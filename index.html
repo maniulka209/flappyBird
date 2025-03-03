@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: white;
+        }
+        #gameWindow{
+            width: 70vh;
+            height: 70vh;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+        canvas {
+            border: 1px solid #000;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="gameWindow">
+        <canvas id="canvas" width="2304" height="3072"></canvas>
+    </div>
+
+    <script src="scripts/gameManager.js"></script>
+    <script>
+        const game = new  gameManager();
+    </script>
+</body>
+</html>
