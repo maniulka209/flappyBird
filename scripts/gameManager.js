@@ -1,43 +1,48 @@
-class gameManager{
+class GameManager{
 
-    constructor(){
-
-        this.deltaTime = 0;
+    constructor()
+    {
+        this.deltaTimeInSeconds = 0;
         this.lastTime =0;
         this.gamestate ="start";
-        this.objects;
+        this.entities = [];
 
-        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
-
-    }
-
-    gameLoop(timestamp){
-
-        this.deltaTime = timestamp - this.lastTime;
-        this.lastTime = timestamp;
-
-        console.log(this.lastTime);
+        this.spriteTest = new Sprite("assets/bluebird-upflap.png", 0, 0, 34, 24);
+        const canvas = document.getElementById("canvas");
+        this.ctx = canvas.getContext("2d");
 
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
 
-    update(){
+    gameLoop(timestamp)
+    {
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.deltaTimeInSeconds = (timestamp - this.lastTime) /1000; 
+        this.lastTime = timestamp;  
 
-        
-        
+        console.log(this.deltaTimeInSeconds);
+         
+        this.spriteTest.draw(this.ctx,100, 100, 68 , 48 );
+
+        requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
 
-    draw(){
-
-    
-
+    update()
+    {
+        for(let element of this.entities){
+            element.update();
+        }
     }
 
-    addObject(entity){
-        this.object.push(entity);
+    draw()
+    {
+        for(let element of this.entities){
+            element.draw();
+        }
     }
-    removeObject(entity){
-        this.object.pop(entity);
+ 
+    addObject(entity)
+    {
+        this.entities.push(entity);
     }
-
 }
