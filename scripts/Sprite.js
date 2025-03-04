@@ -12,7 +12,7 @@ class Sprite{
     }
 
     draw(ctx, posX, posY, width, height)
-    {
+    {  
         ctx.drawImage( this.texture,this.sx , this.sy , this.swidth , this.sheight , posX , posY , width , height)
     }
 }

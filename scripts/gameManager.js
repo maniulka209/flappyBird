@@ -4,12 +4,18 @@ class GameManager{
     {
         this.deltaTimeInSeconds = 0;
         this.lastTime =0;
-        this.gamestate ="start";
         this.entities = [];
 
-        this.spriteTest = new Sprite("assets/bluebird-upflap.png", 0, 0, 34, 24);
         const canvas = document.getElementById("canvas");
         this.ctx = canvas.getContext("2d");
+
+        this.timer = new Timer();
+
+        this.player = new Player(this.ctx , this.timer);
+        this.addObject(this.player);
+
+        
+        this.timer.start();
 
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
@@ -17,12 +23,13 @@ class GameManager{
     gameLoop(timestamp)
     {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        this.deltaTimeInSeconds = (timestamp - this.lastTime) /1000; 
-        this.lastTime = timestamp;  
 
-        console.log(this.deltaTimeInSeconds);
-         
-        this.spriteTest.draw(this.ctx,100, 100, 68 , 48 );
+        this.timer.update();
+
+        console.log(this.timer.deltaTimeInSeconds);
+
+        this.update();
+        this.draw();
 
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
