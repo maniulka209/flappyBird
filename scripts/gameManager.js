@@ -14,9 +14,12 @@ class GameManager{
         this.player = new Player(this.ctx , this.timer);
         this.addObject(this.player);
 
+        this.pipeManager = new PipeManager(this.ctx, this.timer);
+        this.addObject(this.pipeManager);
         
-        this.timer.start();
 
+        this.pipeManager.start();
+        this.timer.start();
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
 
@@ -26,7 +29,7 @@ class GameManager{
 
         this.timer.update();
 
-        console.log(this.timer.deltaTimeInSeconds);
+        //console.log(this.timer.deltaTimeInSeconds);
 
         this.update();
         this.draw();

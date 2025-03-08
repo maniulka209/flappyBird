@@ -12,14 +12,11 @@ class Player{
 
     draw()
     {   
-       if(this.playerState == "start"){
-            this.sprite.draw(this.ctx, this.position.x, this.position.y, 34, 24);
-       }
+      this.sprite.draw(this.ctx, this.position.x, this.position.y, 34, 24);
     }
 
     update()
     {   
         const dropVelocity = 200.0;
-        this.position.y += dropVelocity * this.timer.deltaTimeInSeconds;
     }
 }
