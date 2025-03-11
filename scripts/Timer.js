@@ -1,4 +1,5 @@
-class Timer{
+class Timer
+{
     constructor(){
         this.isOn =false;
         this.startTime = 0;

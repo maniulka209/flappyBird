@@ -14,11 +14,12 @@ class GameManager{
         this.player = new Player(this.ctx , this.timer);
         this.addObject(this.player);
 
-        this.pipeManager = new PipeManager(this.ctx, this.timer);
-        this.addObject(this.pipeManager);
-        
+        //this.pipeManager = new PipeManager(this.ctx , this.timer);
+       // this.addObject(this.pipeManager);
 
-        this.pipeManager.start();
+        this.inputs = new Inputs(this.player);
+        
+        //this.pipeManager.start();
         this.timer.start();
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
@@ -30,6 +31,9 @@ class GameManager{
         this.timer.update();
 
         //console.log(this.timer.deltaTimeInSeconds);
+        this.ctx.moveTo(768/2 + 35,0);
+        this.ctx.lineTo(768/2 + 35, 1024);
+        this.ctx.stroke();
 
         this.update();
         this.draw();

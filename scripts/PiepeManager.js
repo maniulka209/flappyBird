@@ -14,30 +14,44 @@ class PipeManager
     start()
     {   
         const CANVAS_END = 768;
-        this.pipes.push(new Pipe(CANVAS_END*2 , 0,"rotate")); 
-        this.pipes.push(new Pipe(CANVAS_END*2 , 500,"defult")); 
+        const SPACE_BEETWEEN_PIPES = 200;
+         
+        let random = Math.random(0.8 - 0.2) + 0.2;
+        let secondpipe = Math.abs(1-random);
+        console.log(random , " drugie" , secondpipe);
+        
+        this.pipes.push(new Pipe(CANVAS_END*2 , (-1024/2 + 380 )-random*SPACE_BEETWEEN_PIPES ,"rotate"));
+        this.pipes.push(new Pipe(CANVAS_END*2 , (1024/2)+secondpipe*SPACE_BEETWEEN_PIPES ,"defult")); 
     }
 
     update()
     {   
-        const velocity = 100.0;
+        const VELOCITY = 100.0;
         const PIEPE_WIDTH = 52;
-        const PIEP_TRESHOLD_RESPAWN = 500;
+        const PIPE_TRESHOLD_RESPAWN = 500;
         const CANVAS_END = 768;
 
         this.timePassed += this.timer.deltaTimeInSeconds;
 
         for(let element of this.pipes){
-            element.position.x -= velocity * this.timer.deltaTimeInSeconds;
+            element.position.x -= VELOCITY * this.timer.deltaTimeInSeconds;
         }
         
         if( this.pipes.length != 0 && this.pipes[0].position.x < -PIEPE_WIDTH ){
             this.pipes.shift();
         }
 
-        if(this.pipes.length != 0 && this.pipes[this.pipes.length-1].position.x  <= PIEP_TRESHOLD_RESPAWN){
-            this.pipes.push(new Pipe(CANVAS_END , 0,"rotate")); 
-            this.pipes.push(new Pipe(CANVAS_END , 500,"defult")); 
+        if(this.pipes.length != 0 && this.pipes[this.pipes.length-1].position.x  <= PIPE_TRESHOLD_RESPAWN){
+
+             
+            let random = Math.random(0.8 - 0.2) + 0.2;
+            let secondpipe = Math.abs(1-random);
+            const SPACE_BEETWEEN_PIPES = 200;
+
+            console.log(random , " drugie" , secondpipe);
+
+            this.pipes.push(new Pipe(CANVAS_END ,  (-1024/2 + 380 )-random*SPACE_BEETWEEN_PIPES,"rotate")); 
+            this.pipes.push(new Pipe(CANVAS_END ,  (1024/2)+secondpipe*SPACE_BEETWEEN_PIPES,"defult")); 
             this.timePassed = 0;
         }
 

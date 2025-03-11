@@ -1,4 +1,5 @@
-class Sprite{
+class Sprite
+{
 
     constructor(textureSrc, x, y, width, height)
     {
