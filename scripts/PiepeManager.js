@@ -16,12 +16,13 @@ class PipeManager
         const CANVAS_END = 768;
         const SPACE_BEETWEEN_PIPES = 200;
          
-        let random = Math.random(0.8 - 0.2) + 0.2;
-        let secondpipe = Math.abs(1-random);
-        console.log(random , " drugie" , secondpipe);
+        let random = Math.random() *1.5;
+        let secondRandom = 1.5-random;
+        this.previousPipeRandomNummber = random;
         
-        this.pipes.push(new Pipe(CANVAS_END*2 , (-1024/2 + 380 )-random*SPACE_BEETWEEN_PIPES ,"rotate"));
-        this.pipes.push(new Pipe(CANVAS_END*2 , (1024/2)+secondpipe*SPACE_BEETWEEN_PIPES ,"defult")); 
+        this.pipes.push(new Pipe(CANVAS_END*2 , (-1024/2 + 380 ) - random*SPACE_BEETWEEN_PIPES ,"rotate"));
+        this.pipes.push(new Pipe(CANVAS_END*2 , (1024/2) + secondRandom*SPACE_BEETWEEN_PIPES ,"defult")); 
+
     }
 
     update()
@@ -30,6 +31,8 @@ class PipeManager
         const PIEPE_WIDTH = 52;
         const PIPE_TRESHOLD_RESPAWN = 500;
         const CANVAS_END = 768;
+        const SPACE_BEETWEEN_PIPES = 200;
+        const MIN_DIFFERENCE_BETWEEN_GAP_POSITION = 0.5;
 
         this.timePassed += this.timer.deltaTimeInSeconds;
 
@@ -44,15 +47,18 @@ class PipeManager
         if(this.pipes.length != 0 && this.pipes[this.pipes.length-1].position.x  <= PIPE_TRESHOLD_RESPAWN){
 
              
-            let random = Math.random(0.8 - 0.2) + 0.2;
-            let secondpipe = Math.abs(1-random);
-            const SPACE_BEETWEEN_PIPES = 200;
+            let random = Math.random()* 1.5;
 
-            console.log(random , " drugie" , secondpipe);
+            while(Math.abs(this.previousPipeRandomNummber - random) < MIN_DIFFERENCE_BETWEEN_GAP_POSITION ){
+                random = Math.random()* 1.5 ;
+            }
 
-            this.pipes.push(new Pipe(CANVAS_END ,  (-1024/2 + 380 )-random*SPACE_BEETWEEN_PIPES,"rotate")); 
-            this.pipes.push(new Pipe(CANVAS_END ,  (1024/2)+secondpipe*SPACE_BEETWEEN_PIPES,"defult")); 
+            let secondRandom = 1.5 - random;
+
+            this.pipes.push(new Pipe(CANVAS_END , (-1024/2 + 380 ) - random*SPACE_BEETWEEN_PIPES,"rotate")); 
+            this.pipes.push(new Pipe(CANVAS_END , (1024/2) + secondRandom*SPACE_BEETWEEN_PIPES,"defult")); 
             this.timePassed = 0;
+            this.previousPipeRandomNummber = random;
         }
 
     }
@@ -63,4 +69,6 @@ class PipeManager
             element.draw(this.ctx);
         }
     }
+
+
 }
