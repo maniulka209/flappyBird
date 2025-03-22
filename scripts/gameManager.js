@@ -11,15 +11,18 @@ class GameManager{
 
         this.timer = new Timer();
 
-        this.player = new Player(this.ctx , this.timer);
-        this.addObject(this.player);
+        this.player = new Player(this.ctx , this.timer ,null);
+        this.pipeManager = new PipeManager(this.ctx , this.timer, this.player);
+        this.player.pipeManager = this.pipeManager;
+        this.background = new Sprite("assets/background-day.png", 0, 0, 288, 512 );
 
-        this.pipeManager = new PipeManager(this.ctx , this.timer);
+
+        this.addObject(this.player);
         this.addObject(this.pipeManager);
 
         this.inputs = new Inputs(this.player);
         
-        this.pipeManager.start();
+
         this.timer.start();
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
@@ -30,7 +33,6 @@ class GameManager{
 
         this.timer.update();
 
-        //console.log(this.timer.deltaTimeInSeconds);
         this.ctx.moveTo(768/2 + 35,0);
         this.ctx.lineTo(768/2 + 35, 1024);
         this.ctx.stroke();
@@ -49,7 +51,8 @@ class GameManager{
     }
 
     draw()
-    {
+    {   
+        this.background.draw(this.ctx, 0, 0, 288*3, 512*2);
         for(let element of this.entities){
             element.draw();
         }
