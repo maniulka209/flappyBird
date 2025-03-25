@@ -32,7 +32,7 @@ class PipeManager
 
     update()
     {      
-        if(this.isOn)
+        if(this.isOn && this.player.playerState != "dead")
         {
             for( let pipe of this.pipes){
                 if(this.checkCollison(this.player , pipe))

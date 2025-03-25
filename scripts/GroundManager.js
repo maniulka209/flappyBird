@@ -10,9 +10,14 @@ class GroundManager{
     }
 
     update(){
+
         if(this.player.playerState != "dead"){
             const VELOCITY = 200;
             for(let ground of this.elements){
+                if(this.checkCollison(ground,this.player)){
+                    this.player.playerState = "dead";
+
+                }
                  ground.position.x -= VELOCITY * this.timer.deltaTimeInSeconds
             }
             if(this.elements[0].position.x <= -366*2){
@@ -28,6 +33,11 @@ class GroundManager{
         for(let ground of this.elements){
             ground.draw(this.ctx);
         }
+    }
+
+    checkCollison(obj1 , obj2){
+        return  obj1.position.y > obj2.position.y &&
+                obj1.position.y < obj2.position.y + obj2.height * 2;
     }
 
 }
