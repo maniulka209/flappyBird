@@ -42,7 +42,7 @@ class PipeManager
                     this.stop();
                 }
             }
-            const VELOCITY = 100.0;
+            const VELOCITY = 200.0;
             const PIEPE_WIDTH = 52;
             const PIPE_TRESHOLD_RESPAWN = 500;
             const CANVAS_END = 768;

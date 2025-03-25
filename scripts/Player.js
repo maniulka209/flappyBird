@@ -67,7 +67,6 @@ class Player{
 
         if(this.playerState == "drop"){
           this.position.y += DROP_VELOCITY * this.timer.deltaTimeInSeconds;
-          console.log("spada");
         }
         this.previousPlayerPositionY =this.position.y;
       }

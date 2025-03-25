@@ -15,14 +15,14 @@ class GameManager{
         this.pipeManager = new PipeManager(this.ctx , this.timer, this.player);
         this.player.pipeManager = this.pipeManager;
         this.background = new Sprite("assets/background-day.png", 0, 0, 288, 512 );
-
+        this.groundManager = new GroundManager(this.ctx , this.timer, this.player);
 
         this.addObject(this.player);
         this.addObject(this.pipeManager);
+        this.addObject(this.groundManager);
 
         this.inputs = new Inputs(this.player);
         
-
         this.timer.start();
         requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
     }
