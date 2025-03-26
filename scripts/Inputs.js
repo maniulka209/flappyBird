@@ -8,6 +8,9 @@ class Inputs
                 this.player.up();
             }
         });
+        document.addEventListener("mousedown" ,(event) =>{
+            this.player.up();
+        });
 
     }
 }

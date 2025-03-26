@@ -14,12 +14,17 @@ class GameManager{
         this.player = new Player(this.ctx , this.timer ,null);
         this.pipeManager = new PipeManager(this.ctx , this.timer, this.player);
         this.player.pipeManager = this.pipeManager;
-        this.background = new Sprite("assets/background-day.png", 0, 0, 288, 512 );
         this.groundManager = new GroundManager(this.ctx , this.timer, this.player);
+        this.score = new Score(this.ctx, this.pipeManager , this.player);
 
         this.addObject(this.player);
         this.addObject(this.pipeManager);
         this.addObject(this.groundManager);
+        this.addObject(this.score);
+
+        this.gameover =  new Sprite("assets/gameover.png" , 0, 0, 192, 42);
+        this.background = new Sprite("assets/background-day.png", 0, 0, 288, 512 );
+
 
         this.inputs = new Inputs(this.player);
         
@@ -32,10 +37,6 @@ class GameManager{
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 
         this.timer.update();
-
-        this.ctx.moveTo(768/2 + 35,0);
-        this.ctx.lineTo(768/2 + 35, 1024);
-        this.ctx.stroke();
 
         this.update();
         this.draw();
@@ -55,6 +56,10 @@ class GameManager{
         this.background.draw(this.ctx, 0, 0, 288*3, 512*2);
         for(let element of this.entities){
             element.draw();
+        }
+        if(this.player.playerState == "dead"){
+            this.gameover.draw(this.ctx, 768/2 - 192 , 1024/2 -42*2 , 192*2, 42*2);
+            console.log("kubka")
         }
     }
  

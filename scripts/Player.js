@@ -2,8 +2,8 @@ class Player{
 
     constructor(ctx , timer, pipeManager)
     {
-      this.position = new Vec2(768/2,1024/2);
-      this.sprite = new Sprite("assets/bluebird-upflap.png", 0, 0, 34, 24);
+      this.position = new Vec2(150,1024/2);
+      this.sprite = new Sprite("assets/redbird-midflap.png", 0, 0, 34, 24);
       this.ctx = ctx;
       this.playerState = "starting"; 
       this.timer = timer;
@@ -15,7 +15,7 @@ class Player{
 
       this.width  = 34;
       this.height = 24;
-    }
+    } 
 
 
     draw()
@@ -52,7 +52,9 @@ class Player{
         const UP_VLOCITY = 400;
         const MAX_UPWARDS_DISTANCE = 120;
         const DROP_VELOCITY = 500.0;
-
+        if(this.position.y <= -this.height*5 ){
+          this.playerState = "dead";
+        }
         if(this.playerState == "up"){
 
           this.position.y -= UP_VLOCITY * this.timer.deltaTimeInSeconds;

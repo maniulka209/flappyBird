@@ -34,17 +34,16 @@ class PipeManager
     {      
         if(this.isOn && this.player.playerState != "dead")
         {
-            for( let pipe of this.pipes){
+            for(let pipe of this.pipes){
                 if(this.checkCollison(this.player , pipe))
                 {
-                    console.log("ups");
-                    this.player.playerState ="dead";
+                    this.player.playerState = "dead";
                     this.stop();
                 }
             }
             const VELOCITY = 200.0;
             const PIEPE_WIDTH = 52;
-            const PIPE_TRESHOLD_RESPAWN = 500;
+            const PIPE_TRESHOLD_RESPAWN = 400;
             const CANVAS_END = 768;
             const SPACE_BEETWEEN_PIPES = 200;
             const MIN_DIFFERENCE_BETWEEN_GAP_POSITION = 0.5;
@@ -55,7 +54,7 @@ class PipeManager
                 element.position.x -= VELOCITY * this.timer.deltaTimeInSeconds;
             }
             
-            if( this.pipes.length != 0 && this.pipes[0].position.x < -PIEPE_WIDTH ){
+            if( this.pipes.length != 0 && this.pipes[0].position.x < -PIEPE_WIDTH * 3 ){
                 this.pipes.shift();
             }
 
